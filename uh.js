@@ -19,7 +19,7 @@ fetch(`https://opensheet.elk.sh/${SHEET_ID}/Form Responses 1`)
   });
 
 function getDriveImageUrl(driveLink) {
-  const match = url.match(/[?&]id=([^&]+)/);
+  const match = driveLink.match(/[?&]id=([^&]+)/);
   if (!match) return null;
 
   const fileId = match[1];
