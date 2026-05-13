@@ -1,8 +1,6 @@
-const SHEET_ID = "1aWl4zx1xShGkplD9Glm6iW3LiRHg7m_zBztzmn3NvGA";
+const SHEET_ID = "1FXMd5GjyPLpIsyGTScVMNQD5dsMsnZE_Z-VY4dCkQ98";
 
-fetch(
-  `https://opensheet.elk.sh/1Km1had78v2jOwEJU0qGKknrBSOaY-z-L-LJ-dC7pbBM/ALL`,
-)
+fetch(`https://opensheet.elk.sh/${SHEET_ID}/ALL`)
   .then((res) => res.json())
   .then((data) => {
     console.log(data);
@@ -13,6 +11,34 @@ let slug = params.get("slug");
 slug = "?slug=ss";
 
 window.history.pushState({}, "", `re-rites-of-passage${slug}`);
+
+async function loadData() {
+  const response = await fetch(
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2P6HXHcAFH4b_rvDegEIXGPgyGMIJYJpHhmY1UYU4Z376GydGsyG3rmtPeJIDoMNL9g-x2rzBbrMc/pub?output=csv",
+  );
+  const text = await response.text();
+  console.log(text);
+}
+loadData();
+
+async function fetchSheetData(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+    const csvData = await response.text();
+    console.log("Raw CSV Data:", csvData);
+
+    const rows = csvData.split("\n").map((row) => row.split(","));
+    console.table(rows);
+  } catch (error) {
+    console.error("Fetch failed:", error);
+  }
+}
+
+fetchSheetData(
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2P6HXHcAFH4b_rvDegEIXGPgyGMIJYJpHhmY1UYU4Z376GydGsyG3rmtPeJIDoMNL9g-x2rzBbrMc/pub?output=csv",
+);
 
 // fetch(`https://opensheet.elk.sh/${SHEET_ID}/ALL`)
 //   .then((res) => res.json())
