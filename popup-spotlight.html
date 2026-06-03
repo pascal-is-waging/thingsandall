@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Popup Example</title>
+    <style>
+      /* Clickable div */
+      .trigger {
+        width: 200px;
+        padding: 20px;
+        background: #3498db;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 8px;
+        margin: 100px auto;
+      }
+
+      /* Popup */
+      .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(255, 134, 0, 0.91);
+        display: none;
+        z-index: 1000;
+        max-width: 350px;
+      }
+
+      /* Close button */
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+      }
+      .popup__container {
+        display: flex;
+        overflow-y: auto;
+        flex-direction: column;
+        align-items: center;
+        /* text-align: center; */
+      }
+      .popup__container img {
+        max-width: 20vw;
+        height: auto;
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Click trigger -->
+    <div class="trigger" onclick="openPopup()">Click me</div>
+
+    <!-- Popup audio -->
+    <div class="popup" id="popup2">
+      <div class="close-btn" onclick="closePopup()">✖</div>
+      <div
+        class="popup__container"
+        style="overflow-y: auto; font-size: 14px; line-height: 1.5"
+      >
+        <h3>
+          Raw Interview recording of Cheuk Kwan and Lily Cho in conversation on
+          Cheuk Kwan's series Eating Chinese (2006)
+        </h3>
+
+        <img
+          src="https://d2w9rnfcy7mm78.cloudfront.net/46116463/original_5947a7b48f6f6ddc8eb45c60651addf7.jpeg?1778682155?bc=0"
+          alt="Interview Image"
+        />
+
+        <audio controls>
+          <source
+            src="https://attachments.are.na/46050852/e70f13a77bb04fe1c8d40601f5f04186.mp4?1778527386"
+            type="audio/mp4"
+          />
+          Your browser does not support the audio element.
+        </audio>
+
+        <p>
+          Raw interview footage between Lily Cho and Cheuk Kwan on Kwan's 15
+          part documentary series called Chinese Restaurants. This interview was
+          conducted for a chapter in the first Reel Asian Anthology, Reel Asian:
+          Asian Canada on Screen.
+          <br />
+          All of Chinese Restaurants can be found on Cheuk's youtube channel:
+          <a href="https://www.youtube.com/cheukckwan" target="_blank"
+            >https://www.youtube.com/cheukckwan</a
+          ><br />
+          Reel Asian: Asian Canada on Screen can be purchased at Coach House
+          Books:
+          <a href="https://chbooks.com/Books/R/Reel-Asian3" target="_blank"
+            >https://chbooks.com/Books/R/Reel-Asian3</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <script>
+      function openPopup() {
+        document.getElementById("popup2").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+      }
+
+      function closePopup() {
+        document.getElementById("popup2").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
+
+onclick="openPopup()"

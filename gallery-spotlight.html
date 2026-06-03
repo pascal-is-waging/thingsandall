@@ -42,7 +42,7 @@
 
   <body>
     <div id="stage"></div>
-
+    <div id="test"></div>
     <script>
       const images = [
         "https://freight.cargo.site/t/original/i/1e49d79c4bebdf48753fe2c667c48e5f6e241f96a26d4669e460af1216627bc0/jar.png",
@@ -102,6 +102,19 @@
           openPopup(trigger.dataset.popup);
         }
       });
+      const url =
+        "https://cdn.jsdelivr.net/gh/pascal-is-waging/thingsandall/gallery-spotlight.html";
+
+      fetch(url)
+        .then((response) => {
+          if (!response.ok) throw new Error("File not found or private repo");
+          return response.text();
+        })
+        .then((data) => {
+          document.getElementById("test").innerHTML = data;
+          console.log(data);
+        })
+        .catch((error) => console.error("Fetch error:", error));
     </script>
   </body>
 </html>
