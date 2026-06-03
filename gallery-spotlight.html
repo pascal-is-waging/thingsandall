@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Draggable Images</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        background: #111;
+      }
+
+      #stage {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .img {
+        position: absolute;
+        object-fit: cover;
+        max-width: 300px;
+        /* border-radius: 12px; */
+        /* cursor: grab; */
+        user-select: none;
+      }
+
+      .img:active {
+        cursor: grabbing;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="stage"></div>
+
+    <script>
+      const images = [
+        "https://freight.cargo.site/t/original/i/1e49d79c4bebdf48753fe2c667c48e5f6e241f96a26d4669e460af1216627bc0/jar.png",
+        "https://freight.cargo.site/t/original/i/8acf373495923675f4abf247794743e4bda79a8c31bf232944710c17216d2c9d/cd-alt.png",
+      ];
+
+      const SIZE = 300;
+
+      function randPos() {
+        return {
+          x: Math.random() * (window.innerWidth - SIZE),
+          y: Math.random() * (window.innerHeight - SIZE),
+        };
+      }
+
+      images.forEach((src, index) => {
+        const pos = randPos();
+
+        const $img = $("<img/>", {
+          class: "img popup-trigger",
+          src: src,
+          "data-popup": `popup${index + 1}`,
+        }).css({
+          left: pos.x,
+          top: pos.y,
+        });
+
+        $("#stage").append($img);
+
+        $img.draggable({
+          containment: "window",
+        });
+      });
+
+      const overlay = document.getElementById("overlay");
+      const popups = document.querySelectorAll(".popup");
+
+      function openPopup(id) {
+        closeAllPopups();
+
+        const popup = document.getElementById(id);
+        if (!popup) return;
+
+        popup.classList.add("active");
+        overlay.classList.add("active");
+      }
+
+      function closeAllPopups() {
+        popups.forEach((p) => p.classList.remove("active"));
+        overlay.classList.remove("active");
+      }
+
+      document.addEventListener("click", (e) => {
+        const trigger = e.target.closest(".popup-trigger");
+
+        if (trigger) {
+          openPopup(trigger.dataset.popup);
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -40,6 +40,8 @@ fetchSheetData(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2P6HXHcAFH4b_rvDegEIXGPgyGMIJYJpHhmY1UYU4Z376GydGsyG3rmtPeJIDoMNL9g-x2rzBbrMc/pub?output=csv",
 );
 
+//fix the slugs siutation -->
+
 // fetch(`https://opensheet.elk.sh/${SHEET_ID}/ALL`)
 //   .then((res) => res.json())
 //   .then((data) => {
