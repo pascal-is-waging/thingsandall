@@ -64,14 +64,17 @@ function makeDraggable(element) {
 
     element.style.left = `${left}px`;
     element.style.top = `${top}px`;
+    e.preventDefault();
   });
 
   element.addEventListener("pointerup", () => {
     isDragging = false;
+    e.preventDefault();
   });
 
   element.addEventListener("pointercancel", () => {
     isDragging = false;
+    e.preventDefault();
   });
 
   // Prevent popup opening after dragging

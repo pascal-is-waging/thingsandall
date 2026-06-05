@@ -41,95 +41,113 @@
   </head>
 
   <body>
+    <div style="padding: 56.25% 0 0 0; position: relative">
+      <iframe
+        src="https://player.vimeo.com/video/1040969253?h=5b4383a2ae&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+        frameborder="0"
+        allow="
+          autoplay;
+          fullscreen;
+          picture-in-picture;
+          clipboard-write;
+          encrypted-media;
+          web-share;
+        "
+        referrerpolicy="strict-origin-when-cross-origin"
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"
+        title="Sounds That Mark Our Words (2016)"
+      ></iframe>
+    </div>
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <div id="stage"></div>
     <div id="test"></div>
     <script>
-      const images = [
-        "https://freight.cargo.site/t/original/i/1e49d79c4bebdf48753fe2c667c48e5f6e241f96a26d4669e460af1216627bc0/jar.png",
-        "https://freight.cargo.site/t/original/i/8acf373495923675f4abf247794743e4bda79a8c31bf232944710c17216d2c9d/cd-alt.png",
-      ];
+            const images = [
+              "https://freight.cargo.site/t/original/i/1e49d79c4bebdf48753fe2c667c48e5f6e241f96a26d4669e460af1216627bc0/jar.png",
+              "https://freight.cargo.site/t/original/i/8acf373495923675f4abf247794743e4bda79a8c31bf232944710c17216d2c9d/cd-alt.png",
+            ];
 
-      const SIZE = 300;
+            const SIZE = 300;
 
-      function randPos() {
-        return {
-          x: Math.random() * (window.innerWidth - SIZE),
-          y: Math.random() * (window.innerHeight - SIZE),
-        };
-      }
+            function randPos() {
+              return {
+                x: Math.random() * (window.innerWidth - SIZE),
+                y: Math.random() * (window.innerHeight - SIZE),
+              };
+            }
 
-      images.forEach((src, index) => {
-        const pos = randPos();
+            images.forEach((src, index) => {
+              const pos = randPos();
 
-        const $img = $("<img/>", {
-          class: "img popup-trigger",
-          src: src,
-          "data-popup": `popup${index + 1}`,
-        }).css({
-          left: pos.x,
-          top: pos.y,
-        });
+              const $img = $("<img/>", {
+                class: "img popup-trigger",
+                src: src,
+                "data-popup": `popup${index + 1}`,
+              }).css({
+                left: pos.x,
+                top: pos.y,
+              });
 
-        $("#stage").append($img);
+              $("#stage").append($img);
 
-        $img.draggable({
-          containment: "window",
-        });
-      });
+              $img.draggable({
+                containment: "window",
+              });
+            });
 
-      const overlay = document.getElementById("overlay");
-      const popups = document.querySelectorAll(".popup");
+            const overlay = document.getElementById("overlay");
+            const popups = document.querySelectorAll(".popup");
 
-      function openPopup(id) {
-        closeAllPopups();
+            function openPopup(id) {
+              closeAllPopups();
 
-        const popup = document.getElementById(id);
-        if (!popup) return;
+              const popup = document.getElementById(id);
+              if (!popup) return;
 
-        popup.classList.add("active");
-        // overlay.classList.add("active");
-      }
+              popup.classList.add("active");
+              // overlay.classList.add("active");
+            }
 
-      function closeAllPopups() {
-        popups.forEach((p) => p.classList.remove("active"));
-        // overlay.classList.remove("active");
-      }
+            function closeAllPopups() {
+              popups.forEach((p) => p.classList.remove("active"));
+              // overlay.classList.remove("active");
+            }
 
-      document.addEventListener("click", (e) => {
-        const trigger = e.target.closest(".popup-trigger");
+            document.addEventListener("click", (e) => {
+              const trigger = e.target.closest(".popup-trigger");
 
-        if (trigger) {
-          openPopup(trigger.dataset.popup);
-        }
-      });
-      const url =
-        "https://cdn.jsdelivr.net/gh/pascal-is-waging/thingsandall/popup-spotlight.html";
+              if (trigger) {
+                openPopup(trigger.dataset.popup);
+              }
+            });
+            const url =
+              "https://cdn.jsdelivr.net/gh/pascal-is-waging/thingsandall/popup-spotlight.html";
 
-      fetch(url)
-        .then((response) => {
-          if (!response.ok) throw new Error("File not found or private repo");
-          return response.text();
-        })
-        .then((data) => {
-          document.getElementById("test").innerHTML = data;
-          console.log(data);
-          const widget = await import(
-  'https://cdn.jsdelivr.net/gh/username/repo@main/widget.js'
-);
+            fetch(url)
+              .then((response) => {
+                if (!response.ok) throw new Error("File not found or private repo");
+                return response.text();
+              })
+              .then((data) => {
+                document.getElementById("test").innerHTML = data;
+                console.log(data);
+                const widget = await import(
+        'https://cdn.jsdelivr.net/gh/username/repo@main/widget.js'
+      );
 
-widget.init();
-        })
-        .catch((error) => console.error("Fetch error:", error));
+      widget.init();
+              })
+              .catch((error) => console.error("Fetch error:", error));
 
-      function openPopup() {
-        document.getElementById("popup2").style.display = "block";
-        document.getElementById("overlay").style.display = "block";
-      }
+            function openPopup() {
+              document.getElementById("popup2").style.display = "block";
+              document.getElementById("overlay").style.display = "block";
+            }
 
-      function closePopup() {
-        document.getElementById("popup2").style.display = "none";
-        document.getElementById("overlay").style.display = "none";
-      }
+            function closePopup() {
+              document.getElementById("popup2").style.display = "none";
+              document.getElementById("overlay").style.display = "none";
+            }
     </script>
   </body>
 </html>
