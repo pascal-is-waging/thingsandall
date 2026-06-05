@@ -87,12 +87,12 @@
         if (!popup) return;
 
         popup.classList.add("active");
-        overlay.classList.add("active");
+        // overlay.classList.add("active");
       }
 
       function closeAllPopups() {
         popups.forEach((p) => p.classList.remove("active"));
-        overlay.classList.remove("active");
+        // overlay.classList.remove("active");
       }
 
       document.addEventListener("click", (e) => {
@@ -103,7 +103,7 @@
         }
       });
       const url =
-        "https://cdn.jsdelivr.net/gh/pascal-is-waging/thingsandall/gallery-spotlight.html";
+        "https://cdn.jsdelivr.net/gh/pascal-is-waging/thingsandall/popup-spotlight.html";
 
       fetch(url)
         .then((response) => {
@@ -113,8 +113,23 @@
         .then((data) => {
           document.getElementById("test").innerHTML = data;
           console.log(data);
+          const widget = await import(
+  'https://cdn.jsdelivr.net/gh/username/repo@main/widget.js'
+);
+
+widget.init();
         })
         .catch((error) => console.error("Fetch error:", error));
+
+      function openPopup() {
+        document.getElementById("popup2").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+      }
+
+      function closePopup() {
+        document.getElementById("popup2").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+      }
     </script>
   </body>
 </html>
